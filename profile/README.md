@@ -98,9 +98,9 @@ flowchart LR
   end
 
   A -.-> D
-  D -. "  WORKING · in your browser  " .-> OUT["the payload, in plain text"]:::ok
-  C -. "  PLANNED  " .-> CI
-  N -. "  PLANNED  " .-> A
+  D -. "WORKING · in your browser&nbsp;" .-> OUT["the payload, in plain text"]:::ok
+  C -. "PLANNED&nbsp;" .-> CI
+  N -. "PLANNED&nbsp;" .-> A
 
   classDef req fill:#0B0C0F,stroke:#8D929B,stroke-width:1.5px,color:#ECE9E2
   classDef core fill:#0B0C0F,stroke:#F2B53A,stroke-width:1.5px,color:#ECE9E2
