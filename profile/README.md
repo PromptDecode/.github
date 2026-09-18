@@ -73,7 +73,6 @@ Drawn as designed. Only the box marked `WORKING` exists today.
 ```mermaid
 %%{init: {"theme":"base","themeVariables":{
   "background":"transparent",
-  "fontFamily":"ui-monospace, SFMono-Regular, Menlo, monospace",
   "fontSize":"13px",
   "primaryColor":"#0B0C0F","primaryTextColor":"#ECE9E2","primaryBorderColor":"#3A3F47",
   "lineColor":"#6B7382","textColor":"#8D929B",
@@ -98,9 +97,9 @@ flowchart LR
   end
 
   A -.-> D
-  D -. "WORKING · in your browser&nbsp;" .-> OUT["the payload, in plain text"]:::ok
-  C -. "PLANNED&nbsp;" .-> CI
-  N -. "PLANNED&nbsp;" .-> A
+  D -. "WORKING · in your browser" .-> OUT["the payload, in plain text"]:::ok
+  C -. "PLANNED" .-> CI
+  N -. "PLANNED" .-> A
 
   classDef req fill:#0B0C0F,stroke:#8D929B,stroke-width:1.5px,color:#ECE9E2
   classDef core fill:#0B0C0F,stroke:#F2B53A,stroke-width:1.5px,color:#ECE9E2
