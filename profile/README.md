@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/PromptDecode/.github/main/assets/org-banner.png" alt="promptdecode. Hidden text in a pull request can instruct your agent to approve it. The decoder works; the scanners are planned." width="100%">
+  <img src="https://raw.githubusercontent.com/PromptDecode/.github/main/assets/org-banner.png" alt="promptdecode. Hidden text in a pull request can instruct your agent to approve it. The decoder works; the config scanner runs from source and the rest is planned." width="100%">
 </p>
 
 <p align="center">
   <a href="https://promptdeco.de/#demo"><img src="https://img.shields.io/badge/THE%20DECODER-WORKING-F2B53A?style=for-the-badge&labelColor=000000" alt="The decoder: working"></a>
-  <img src="https://img.shields.io/badge/THE%20SCANNERS-PLANNED-8D929B?style=for-the-badge&labelColor=000000" alt="The scanners: planned">
+  <img src="https://img.shields.io/badge/THE%20SCANNERS-CONFIG_SHIPS-8D929B?style=for-the-badge&labelColor=000000" alt="The scanners: config ships">
   <a href="https://github.com/PromptDecode/website/blob/main/LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-ECE9E2?style=for-the-badge&labelColor=000000" alt="License: MIT"></a>
 </p>
 
@@ -30,21 +30,22 @@ are not reading the same document.
 
 ---
 
-## Two things, and which is which
+## Three things, and which is which
 
 This matters more than anything else on this page, so it is first.
 
 | | What it is | Status |
 | :--- | :--- | :--- |
 | **The decoder** | The tool at [promptdeco.de/#demo](https://promptdeco.de/#demo). Paste any text; it reports every hidden code point and reconstructs the payload. Runs in your browser, sends nothing anywhere. | `WORKING` |
-| **promptdecode** | The product: the `config` and `content` engines, the CLI, the GitHub Action, the open benchmark, the private-repo tier. | `PLANNED` |
+| **The config scanner** | The `config` engine and the `promptdecode scan` CLI: taint analysis of GitHub Actions workflows, built and running from source, no release yet. Source at [PromptDecode/promptdecode](https://github.com/PromptDecode/promptdecode). | `WORKING` |
+| **promptdecode** | The product: the `content` engine, the GitHub Action, the open benchmark, the private-repo tier. | `PLANNED` |
 
-Nothing beyond the decoder and its page is built. There is no published package, no action to
+Beyond the decoder, its page and the config scanner, nothing is built. There is no published package, no action to
 install, no benchmark, no docs site, and no price, published or estimated.
 
 Two labels are used everywhere, and they govern the tense of the sentence around them:
 
-- `WORKING`: built, deployed, usable now. Present tense is allowed only here.
+- `WORKING`: built, usable now. Present tense is allowed only here.
 - `PLANNED`: named, not built. Conditional tense, and a chip wherever it appears on the site.
 
 ---
@@ -68,7 +69,7 @@ and the implementation cannot drift apart.
 
 ## The attack it is about
 
-Drawn as designed. Only the box marked `WORKING` exists today.
+Drawn as designed. The boxes marked `WORKING` exist today: the decoder in your browser, the config engine from source.
 
 ```mermaid
 %%{init: {"theme":"base","themeVariables":{
@@ -92,13 +93,13 @@ flowchart LR
 
   subgraph PD["PROMPTDECODE"]
     D["<b>decoder</b><br/>tag block · bidi · variation selectors"]:::ok
-    C["<b>config</b> engine<br/>taints workflow input to agent sink"]:::mod
+    C["<b>config</b> engine<br/>taints workflow input to agent sink"]:::ok
     N["<b>content</b> engine<br/>decodes payloads across the repo"]:::mod
   end
 
   A -.-> D
   D -. "WORKING · in your browser" .-> OUT["the payload, in plain text"]:::ok
-  C -. "PLANNED" .-> CI
+  C -. "WORKING · from source" .-> CI
   N -. "PLANNED" .-> A
 
   classDef req fill:#0B0C0F,stroke:#8D929B,stroke-width:1.5px,color:#ECE9E2
@@ -122,8 +123,8 @@ A tokenizer does not skip them.
 in plain text tells you what it said, and whether it was aimed at your agent.
 
 **3. The workflow is half the problem.** A hidden instruction only matters if something acts on it.
-The planned `config` engine is about the other half: untrusted input reaching an agent step that
-holds a write token, traced statically, with no model in the loop.
+The `config` engine covers the other half: untrusted input reaching an agent step that
+holds a write token, traced statically, with no model in the loop. It is built and runs from source.
 
 **4. We will not publish a percentage of attacks blocked.** Published evasion rates against
 commercial detectors swing wildly with technique, and a number that moves that much is not a number.
@@ -137,8 +138,10 @@ the corpus nor the harness is written yet.
 
 Stated here rather than buried, because trust is the whole point.
 
-- **It does not scan anything, yet.** There is no CLI, no engine, no Action. The decoder reads one
-  piece of text that you give it, in your browser.
+- **It does not scan repositories by itself.** The decoder reads one
+  piece of text that you give it, in your browser. Repository scanning is the
+  `config` engine and the `promptdecode scan` CLI, which run from source with
+  no release yet. There is no Action.
 - **It does not catch what is not on the list.** Homoglyphs, zero-width joiners used for other
   purposes, steganography in images, and every technique not named above go undetected. That is a
   statement about scope, not a claim of completeness.
@@ -155,10 +158,10 @@ Stated here rather than buried, because trust is the whole point.
 | Capability | Status | Where |
 | :--- | :--- | :--- |
 | The decoder, the site, its `llms.txt`, social card and this profile | `WORKING` | [website](https://github.com/PromptDecode/website) |
-| `promptdeco.de` on Cloudflare (the zone is still at the registrar) | `PLANNED` | [website](https://github.com/PromptDecode/website) |
+| `promptdeco.de` on Cloudflare | `WORKING` | [website](https://github.com/PromptDecode/website) |
 | The `content` engine: the decoder's rules over a whole repository | `PLANNED` | not started |
-| The `config` engine: taint analysis of GitHub Actions | `PLANNED` | not started |
-| `promptdecode scan`, the CLI | `PLANNED` | not started |
+| The `config` engine: taint analysis of GitHub Actions | `WORKING` | [promptdecode](https://github.com/PromptDecode/promptdecode), from source, no release yet |
+| `promptdecode scan`, the CLI | `WORKING` | [promptdecode](https://github.com/PromptDecode/promptdecode), from source, no release yet |
 | `promptdecode/action@v1`, check annotations on a PR | `PLANNED` | not started |
 | The open benchmark: corpus, harness, recall at a stated FPR | `PLANNED` | not started |
 
@@ -171,6 +174,7 @@ The roadmap is the issue tracker. There is no private version of it.
 | Repo | What it is |
 | :--- | :--- |
 | [**website**](https://github.com/PromptDecode/website) | promptdeco.de: the page, the decoder, its checks, its images and its deploy script. MIT |
+| [**promptdecode**](https://github.com/PromptDecode/promptdecode) | The engines and the CLI: config built and running from source, content planned |
 | **.github** | This page, the banner and the mark |
 
 <p align="center">
